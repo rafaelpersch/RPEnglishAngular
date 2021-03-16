@@ -11,24 +11,18 @@ export class BaseHttpService {
   
   constructor(private httpClient: HttpClient, private router: Router) { }
 
-  private getAuthHeader(): HttpHeaders | any {
+  private getAuthHeader(): any {
     const token = this.getToken();
 
     if (token) {
-      return new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token.token.token});
+      return { headers : new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token.token.token})};
     }
 
-    return new HttpHeaders({ 'Content-Type': 'application/json' });
+    return { headers : new HttpHeaders({ 'Content-Type': 'application/json'})};
   }
 
-  public get(url: string): Observable<any[]> {
-    return this.httpClient.get<any[]>(url)
-      .pipe(
-        catchError(this.handleError.bind(this)))
-  }
-
-  public getById(url: string, id: number): Observable<any> {
-    return this.httpClient.get<any>(url + '/' + id)
+  public get(url: string): Observable<any> {
+    return this.httpClient.get<any>(url, this.getAuthHeader())
       .pipe(
         catchError(this.handleError.bind(this))
       )
@@ -42,14 +36,14 @@ export class BaseHttpService {
   }
 
   public put(url: string, data: any): Observable<any> {
-    return this.httpClient.put<any>(url + '/' + data.id, JSON.stringify(data), this.getAuthHeader())
+    return this.httpClient.put<any>(url, JSON.stringify(data), this.getAuthHeader())
       .pipe(
         catchError(this.handleError.bind(this))
       )
   }
 
-  public delete(url: string, id: any): Observable<any> {
-    return this.httpClient.delete<any>(url + '/' + id, this.getAuthHeader())
+  public delete(url: string): Observable<any> {
+    return this.httpClient.delete<any>(url, this.getAuthHeader())
       .pipe(
         catchError(this.handleError.bind(this))
       )
