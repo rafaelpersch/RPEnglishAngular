@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { LocalStorageKeyEnum } from '../models/localStorageKeyEnum';
 
 @Injectable({
   providedIn: 'root'
@@ -68,7 +69,7 @@ export class BaseHttpService {
   }  
 
   public getToken(): any {
-    const content = localStorage.getItem('LocalStorageRPEnglishAngular');
+    const content = localStorage.getItem(LocalStorageKeyEnum.AUTH_TOKEN);
 
     if (content){
       return JSON.parse(content);
@@ -78,12 +79,7 @@ export class BaseHttpService {
   }
 
   public removeToken(): void {
-    localStorage.removeItem('LocalStorageRPEnglishAngular');
-  }
-
-  public signOut(): void {
-    this.removeToken();
-    this.router.navigate(['login']);
+    localStorage.removeItem(LocalStorageKeyEnum.AUTH_TOKEN);
   }
 
   public getCurrentUser(): any {
