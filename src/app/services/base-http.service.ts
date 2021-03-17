@@ -67,7 +67,7 @@ export class BaseHttpService {
     return throwError(error);
   }  
 
-  private getToken(): any {
+  public getToken(): any {
     const content = localStorage.getItem('LocalStorageRPEnglishAngular');
 
     if (content){
@@ -75,6 +75,15 @@ export class BaseHttpService {
     }
 
     return null;
+  }
+
+  public removeToken(): void {
+    localStorage.removeItem('LocalStorageRPEnglishAngular');
+  }
+
+  public signOut(): void {
+    this.removeToken();
+    this.router.navigate(['login']);
   }
 
   public getCurrentUser(): any {
