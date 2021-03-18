@@ -21,7 +21,7 @@ export class AppComponent {
   constructor(private annotationService: AnnotationService){}
   
   ngOnInit() {
-    this.annotationService.getAnnorations().subscribe((annorations: Annotation[]) => {
+    /*this.annotationService.getAnnorations().subscribe((annorations: Annotation[]) => {
       alert("success");
       console.log(annorations);
     },
@@ -29,7 +29,7 @@ export class AppComponent {
       alert("error");
       console.log("error: " + error);
       console.log(error);
-    })
+    })*/
     //this.getCars();
   }
 

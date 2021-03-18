@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AnnotationsComponent } from './annotations/annotations.component';
 import { AppComponent } from './app.component';
 
 const routes: Routes = [  {
@@ -9,6 +10,9 @@ const routes: Routes = [  {
 }, {
   path: 'login',
   component: AppComponent,
+}, {
+  path: 'annotations',
+  component: AnnotationsComponent,
 }];
 
 @NgModule({
