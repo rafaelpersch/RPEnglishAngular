@@ -12,6 +12,7 @@ import { CategoriesComponent } from './categories/categories.component';
 import { WordComponent } from './word/word.component';
 import { WordsComponent } from './words/words.component';
 import { LayoutComponent } from './layout/layout.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { LayoutComponent } from './layout/layout.component';
     CategoriesComponent,
     WordComponent,
     WordsComponent,
-    LayoutComponent
+    LayoutComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
