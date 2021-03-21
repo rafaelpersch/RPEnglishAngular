@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { ToastrModule } from 'ngx-toastr';
+
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +15,7 @@ import { WordComponent } from './word/word.component';
 import { WordsComponent } from './words/words.component';
 import { LayoutComponent } from './layout/layout.component';
 import { LoginComponent } from './login/login.component';
+import { BaseComponent } from './base/base.component';
 
 @NgModule({
   declarations: [
@@ -24,13 +27,17 @@ import { LoginComponent } from './login/login.component';
     WordComponent,
     WordsComponent,
     LayoutComponent,
-    LoginComponent
+    LoginComponent,
+    BaseComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ToastrModule.forRoot({
+      timeOut: 3000
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
