@@ -6,7 +6,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AnnotationComponent } from './annotation/annotation.component';
 import { AnnotationsComponent } from './annotations/annotations.component';
 import { CategoryComponent } from './category/category.component';
@@ -35,6 +35,7 @@ import { BaseComponent } from './base/base.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     ToastrModule.forRoot({
       timeOut: 3000
     }),

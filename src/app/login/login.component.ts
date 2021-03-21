@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BaseComponent } from '../base/base.component';
 import { Login } from '../models/login';
 import { ToastrService } from 'ngx-toastr';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-login',
@@ -9,22 +11,27 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent extends BaseComponent implements OnInit {
-  
+  loginForm: FormGroup;
   model = new Login();
   year: number =  (new Date()).getFullYear();
-  disabled: boolean = false;
   applicationMessage: string = '';
+  clickSubmit:boolean = false;
 
-  constructor(toastr: ToastrService) { super(toastr); }
+  constructor(private formBuilder: FormBuilder, toastr: ToastrService) { 
+    super(toastr); 
+
+    this.loginForm = this.formBuilder.group({
+      email   : ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    });    
+  }
 
   ngOnInit(): void {
   }
 
   onLogin(): void {
-    //this.disabled = !this.disabled;
     this.applicationMessage = "hehe";
     this.showSuccess('haha foi', 'title');
-    //this.showError('heheh', 'title n');
     /*this.showProgress();
     this._service.login(this.model).then((response: any) => {
         this.hideProgress();
@@ -49,6 +56,14 @@ export class LoginComponent extends BaseComponent implements OnInit {
             });
         }
     });*/
-}
+  }
 
+  onSubmit(): void {
+    this.clickSubmit = true;
+    if (!this.loginForm.valid){
+      return;
+    }
+    console.warn('Your order has been submitted', this.loginForm.value);
+    //this.loginForm.reset();
+  }  
 }
