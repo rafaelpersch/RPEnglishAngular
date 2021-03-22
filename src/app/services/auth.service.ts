@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -13,11 +13,17 @@ import { LocalStorageKeyEnum } from '../models/localStorageKeyEnum';
 export class AuthService extends BaseHttpService implements CanActivate {
 
     private _router: Router;
-    constructor(httpClient: HttpClient, router: Router) { super(httpClient, router); this._router = router;}
+    private _httpClient: HttpClient
+    constructor(httpClient: HttpClient, router: Router) { 
+        super(httpClient, router); 
+        
+        this._router = router;
+        this._httpClient = httpClient;
+    }
 
     public postLogin(login:Login): Observable<any> {
-        return this.post(environment.baseAPI + '/Login', login);
-    }
+        return this._httpClient.post<any>(environment.baseAPI + '/Login', JSON.stringify(login), { headers : new HttpHeaders({ 'Content-Type': 'application/json'})});
+    }   
 
     public isAuthenticated(): boolean {
       
@@ -53,7 +59,7 @@ export class AuthService extends BaseHttpService implements CanActivate {
             this._router.navigateByUrl(redirectUrl);
             localStorage.removeItem(LocalStorageKeyEnum.REDIRECT_URL);
         } else {
-            this._router.navigate([`/`]);
+            this._router.navigate(['/annotations']);
         }
     }
 

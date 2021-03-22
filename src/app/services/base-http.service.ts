@@ -27,7 +27,7 @@ export class BaseHttpService {
       .pipe(
         catchError(this.handleError.bind(this))
       )
-  }
+  } 
 
   public post(url: string, data: any): Observable<any> {
     return this.httpClient.post<any>(url, JSON.stringify(data), this.getAuthHeader())

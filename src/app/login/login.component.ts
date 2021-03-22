@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BaseComponent } from '../base/base.component';
 import { Login } from '../models/login';
 import { ToastrService } from 'ngx-toastr';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +17,7 @@ export class LoginComponent extends BaseComponent implements OnInit {
   applicationMessage: string = '';
   clickSubmit:boolean = false;
 
-  constructor(private formBuilder: FormBuilder, toastr: ToastrService) { 
+  constructor(private authService:AuthService, private formBuilder: FormBuilder, toastr: ToastrService) { 
     super(toastr); 
 
     this.loginForm = this.formBuilder.group({
@@ -29,16 +29,39 @@ export class LoginComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onLogin(): void {
-    this.applicationMessage = "hehe";
-    this.showSuccess('haha foi', 'title');
-    /*this.showProgress();
-    this._service.login(this.model).then((response: any) => {
+  onSubmit(): void {
+    this.clickSubmit = true;
+
+    if (!this.loginForm.valid){
+      return;
+    }
+
+    //this.applicationMessage = "hehe";
+    //this.showSuccess('haha foi', 'title');
+    this.showProgress();
+
+    this.authService.postLogin(this.model).subscribe((response: any) => {
+      this.hideProgress();
+      this.authService.signIn(response);
+    },
+    error => {
+      console.warn(error);
+      
+      if (error.status === 401){
+        this.applicationMessage = error.error;
+      }else{
+        this.applicationMessage = 'Ops!';
+      }
+      
+      this.hideProgress();
+    });
+
+    /*this.authService.postLogin(this.model).then((response: any) => {
         this.hideProgress();
         if (response.message != null) {
             this.showWarning(response.message);
         } else {
-            this._service.signIn(response.data);
+            
             this.registerMenu();
         }
     }).catch(err => {
@@ -55,15 +78,6 @@ export class LoginComponent extends BaseComponent implements OnInit {
                 duration        : 2000
             });
         }
-    });*/
-  }
-
-  onSubmit(): void {
-    this.clickSubmit = true;
-    if (!this.loginForm.valid){
-      return;
-    }
-    console.warn('Your order has been submitted', this.loginForm.value);
-    //this.loginForm.reset();
+    });*/    
   }  
 }

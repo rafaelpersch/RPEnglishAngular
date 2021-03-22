@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { LocalStorageKeyEnum } from '../models/localStorageKeyEnum';
 import { ToastrService } from 'ngx-toastr';
 
-declare var $: any;
-
 @Component({
   selector: 'app-base',
   template: ''
@@ -51,11 +49,12 @@ export class BaseComponent {
   }      
 
   showProgress(): void {
-    $('#loader').css('display', 'block');
+    //(document.querySelector('.loading') as HTMLElement).style.display = "block"; 
+    (document.querySelector('.loading') as HTMLElement).style.visibility = "visible"; 
   }
 
   hideProgress(): void {
-    $('#loader').css('display', 'none');
+    //(document.querySelector('.loading') as HTMLElement).style.display = "none"; 
+    (document.querySelector('.loading') as HTMLElement).style.visibility = "hidden"; 
   }
-
 }

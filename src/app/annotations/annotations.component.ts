@@ -10,7 +10,6 @@ export class AnnotationsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    alert("passou");
   }
 
 }
