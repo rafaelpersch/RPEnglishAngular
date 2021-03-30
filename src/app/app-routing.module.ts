@@ -6,6 +6,7 @@ import { AnnotationsComponent } from './annotations/annotations.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { CategoryComponent } from './category/category.component';
 import { LoginComponent } from './login/login.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { AuthService } from './services/auth.service';
 import { WordComponent } from './word/word.component';
 import { WordsComponent } from './words/words.component';
@@ -20,7 +21,7 @@ const routes: Routes = [
   { path: 'word', component: WordComponent, canActivate: [AuthService] },
   { path: 'word/:id', component: WordComponent, canActivate: [AuthService] },
   { path: 'words', component: WordsComponent, canActivate: [AuthService] },
-  { path: '**', redirectTo: 'login'}];
+  { path: '**', component:NotFoundComponent}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

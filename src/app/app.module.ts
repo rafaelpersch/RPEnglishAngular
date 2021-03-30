@@ -17,6 +17,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { LoginComponent } from './login/login.component';
 import { BaseComponent } from './base/base.component';
 import { ContentComponent } from './content/content.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ContentComponent } from './content/content.component';
     LayoutComponent,
     LoginComponent,
     BaseComponent,
-    ContentComponent
+    ContentComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
