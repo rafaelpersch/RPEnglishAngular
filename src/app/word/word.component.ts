@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-word',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WordComponent implements OnInit {
 
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute, private router:Router) { }
 
   ngOnInit(): void {
+    alert(this.activatedRoute.snapshot.params.id);
+    alert(this.router.url);
   }
 
 }

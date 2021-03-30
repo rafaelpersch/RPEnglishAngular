@@ -4,6 +4,7 @@ import { Car } from './models/car';
 import { NgForm } from '@angular/forms';
 import { AnnotationService } from './services/annotation.service';
 import { Annotation } from './models/annotation';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -15,10 +16,17 @@ export class AppComponent {
 
   car = {} as Car;
   cars: Car[] = [];
+  useLayout: boolean = true;
 
   /*constructor(private carService: BaseHttpService) {
   }*/
-  constructor(private annotationService: AnnotationService){}
+  constructor(private annotationService: AnnotationService, private location:Location){
+    if(this.location.path() === '' || 
+       this.location.path() === '/login'){
+         
+      this.useLayout = false;
+    }
+  }
   
   ngOnInit() {
     /*this.annotationService.getAnnorations().subscribe((annorations: Annotation[]) => {
