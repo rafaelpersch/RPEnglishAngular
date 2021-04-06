@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Annotation } from '../models/annotation';
+import { AnnotationService } from '../services/annotation.service';
 
 @Component({
   selector: 'app-annotations',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AnnotationsComponent implements OnInit {
 
-  constructor() { }
+  annotations:Annotation[];
 
-  ngOnInit(): void {
+  constructor(private annotationService:AnnotationService) { 
+    this.annotations = [];
   }
 
+  ngOnInit(): void {
+
+    this.annotationService.getAnnorations().subscribe((response: any) => {
+      this.annotations = response;
+    },
+    error => {
+      console.warn(error);
+    });
+  }
 }
