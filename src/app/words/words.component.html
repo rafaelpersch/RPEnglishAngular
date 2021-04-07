@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h4>Words</h4>
-        <a href="/Words/Create" class="btn btn-primary float-right">New</a>
+        <a routerLink="/word" class="btn btn-primary float-right">New</a>
     </div>
 </div>
 <div class="row">
@@ -39,7 +39,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let word of words" >
-                    <td><a href="/Words/Edit/@word.Id">{{word.name}}</a></td>
+                    <td><a routerLink="/word/{{word.id}}">{{word.name}}</a></td>
                     <td>{{word.translation}}</td>
                     <td>{{word.observation}}</td>
                     <td><a href="/Words/Delete/@word.Id" onclick="return confirm('Deseja excluir?')">Excluir</a></td>
