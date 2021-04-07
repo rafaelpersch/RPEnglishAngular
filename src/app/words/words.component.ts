@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { BaseComponent } from '../base/base.component';
 import { Word } from '../models/word';
 import { WordService } from '../services/word.service';
 
@@ -7,20 +9,26 @@ import { WordService } from '../services/word.service';
   templateUrl: './words.component.html',
   styleUrls: ['./words.component.css']
 })
-export class WordsComponent implements OnInit {
+export class WordsComponent extends BaseComponent implements OnInit {
 
   words:Word[];
 
-  constructor(private wordService:WordService) { 
+  constructor(private wordService:WordService, toastr: ToastrService) { 
+    super(toastr); 
+
     this.words = [];
   }
 
   ngOnInit(): void {
+    this.showProgress();
+
     this.wordService.getWords().subscribe((response: any) => {
       this.words = response;
+      this.hideProgress();
     },
     error => {
       console.warn(error);
+      this.hideProgress();
     });
   }
 

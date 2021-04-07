@@ -49,12 +49,12 @@ export class BaseComponent {
   }      
 
   showProgress(): void {
-    //(document.querySelector('.loading') as HTMLElement).style.display = "block"; 
+    (document.querySelector('.loading') as HTMLElement).style.display = "block"; 
     (document.querySelector('.loading') as HTMLElement).style.visibility = "visible"; 
   }
 
   hideProgress(): void {
-    //(document.querySelector('.loading') as HTMLElement).style.display = "none"; 
+    (document.querySelector('.loading') as HTMLElement).style.display = "none"; 
     (document.querySelector('.loading') as HTMLElement).style.visibility = "hidden"; 
   }
 }
