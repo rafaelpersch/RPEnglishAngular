@@ -66,11 +66,11 @@
 </div>-->
 
 
-<ng-container *ngIf="this.useLayout === true">
+<ng-container *ngIf="this.isAuthenticated">
   <app-layout></app-layout>
 </ng-container>
 
-<ng-container *ngIf="this.useLayout === false">
+<ng-container *ngIf="!this.isAuthenticated">
   <app-login></app-login>
 </ng-container>
 

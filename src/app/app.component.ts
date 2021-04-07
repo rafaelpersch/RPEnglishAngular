@@ -4,6 +4,7 @@ import { Car } from './models/car';
 import { NgForm } from '@angular/forms';
 import { AnnotationService } from './services/annotation.service';
 import { Annotation } from './models/annotation';
+import { AuthService } from './services/auth.service';
 import { Location } from '@angular/common';
 
 @Component({
@@ -16,15 +17,19 @@ export class AppComponent {
 
   car = {} as Car;
   cars: Car[] = [];
-  useLayout: boolean = true;
+  isAuthenticated: boolean = false;
 
   /*constructor(private carService: BaseHttpService) {
   }*/
-  constructor(private annotationService: AnnotationService, private location:Location){
-    if(this.location.path() === '' || 
-       this.location.path() === '/login'){
-         
-      this.useLayout = false;
+  constructor(private authService: AuthService, private location:Location){
+    this.isAuthenticated = authService.isAuthenticated();
+
+    if (this.isAuthenticated){
+      if(this.location.path() === '' || 
+         this.location.path() === '/login'){
+          window.location.href = '/annotations';
+        
+      }
     }
   }
   
