@@ -17,7 +17,7 @@
             <tbody>
                 <tr *ngFor="let annotation of annotations" >
                     <td><a routerLink="/annotation/{{annotation.id}}">{{annotation.text}}</a></td>
-                    <td><a href="/Annotations/Delete/@annotation.Id" onclick="return confirm('Deseja excluir?')">Excluir</a></td>
+                    <td><a href="javascript:void(0);" (click)="delete(annotation.id)">Excluir</a></td>
                 </tr>
             </tbody>
         </table>

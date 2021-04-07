@@ -42,7 +42,7 @@
                     <td><a routerLink="/word/{{word.id}}">{{word.name}}</a></td>
                     <td>{{word.translation}}</td>
                     <td>{{word.observation}}</td>
-                    <td><a href="/Words/Delete/@word.Id" onclick="return confirm('Deseja excluir?')">Excluir</a></td>
+                    <td><a href="javascript:void(0);" (click)="delete(word.id)">Excluir</a></td>
                 </tr>
             </tbody>
         </table>

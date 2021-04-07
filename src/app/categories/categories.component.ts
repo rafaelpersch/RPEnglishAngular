@@ -32,4 +32,12 @@ export class CategoriesComponent extends BaseComponent implements OnInit {
     });
   }
 
+  delete(id:string): void {
+    if (confirm('Deseja excluir?')){
+      this.showProgress();
+      alert("s: " + id);
+      //processar
+      this.hideProgress();
+    }
+  }
 }

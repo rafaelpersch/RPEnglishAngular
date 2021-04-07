@@ -17,7 +17,7 @@
             <tbody>
                 <tr *ngFor="let category of categories" >
                     <td><a routerLink="/category/{{category.id}}">{{category.name}}</a></td>
-                    <td><a href="/Categories/Delete/@category.Id" onclick="return confirm('Deseja excluir?')">Excluir</a></td>
+                    <td><a href="javascript:void(0);" (click)="delete(category.id)">Excluir</a></td>
                 </tr>
             </tbody>
         </table>
