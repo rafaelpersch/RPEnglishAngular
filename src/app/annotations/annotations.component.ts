@@ -20,6 +20,25 @@ export class AnnotationsComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadAnnotations();
+  }
+
+  delete(id:string): void {
+    if (confirm('Deseja excluir?')){
+      
+      this.showProgress();
+      
+      this.annotationService.deleteAnnoration(id).subscribe((response: any) => {
+        this.loadAnnotations();
+      },
+      error => {
+        this.showError(error.error);
+        this.hideProgress();
+      });
+    }
+  }
+
+  loadAnnotations(): void{
     this.showProgress();
 
     this.annotationService.getAnnorations().subscribe((response: any) => {
@@ -27,17 +46,8 @@ export class AnnotationsComponent extends BaseComponent implements OnInit {
       this.hideProgress();
     },
     error => {
-      console.warn(error);
+      this.showError(error.error);
       this.hideProgress();
     });
-  }
-
-  delete(id:string): void {
-    if (confirm('Deseja excluir?')){
-      this.showProgress();
-      alert("s: " + id);
-      //processar
-      this.hideProgress();
-    }
   }
 }

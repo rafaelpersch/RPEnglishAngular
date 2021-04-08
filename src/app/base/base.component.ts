@@ -32,20 +32,20 @@ export class BaseComponent {
   }
 
   //https://www.npmjs.com/package/ngx-toastr
-  showSuccess(message: string, title: string) {
-    this.toastr.success(message, title);
+  showSuccess(message: string) {
+    this.toastr.success(message);
   }
 
-  showError(message: string, title: string) {
-    this.toastr.error(message, title);
+  showError(message: string) {
+    this.toastr.error(message);
   }
 
-  showInfo(message: string, title: string) {
-    this.toastr.info(message, title);
+  showInfo(message: string) {
+    this.toastr.info(message);
   }
   
-  showWarning(message: string, title: string) {
-    this.toastr.warning(message, title);
+  showWarning(message: string) {
+    this.toastr.warning(message);
   }      
 
   showProgress(): void {

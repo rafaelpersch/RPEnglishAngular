@@ -20,6 +20,25 @@ export class CategoriesComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadCategories();
+  }
+
+  delete(id:string): void {
+    if (confirm('Deseja excluir?')){
+
+      this.showProgress();
+      
+      this.categoryService.deleteCategory(id).subscribe((response: any) => {
+        this.loadCategories();
+      },
+      error => {
+        this.showError(error.error);
+        this.hideProgress();
+      });      
+    }
+  }
+
+  loadCategories(): void{
     this.showProgress();
 
     this.categoryService.getCategories().subscribe((response: any) => {
@@ -27,17 +46,8 @@ export class CategoriesComponent extends BaseComponent implements OnInit {
       this.hideProgress();
     },
     error => {
-      console.warn(error);
+      this.showError(error.error);
       this.hideProgress();
     });
-  }
-
-  delete(id:string): void {
-    if (confirm('Deseja excluir?')){
-      this.showProgress();
-      alert("s: " + id);
-      //processar
-      this.hideProgress();
-    }
-  }
+  }  
 }

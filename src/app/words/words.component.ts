@@ -20,6 +20,25 @@ export class WordsComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadWords();
+  }
+
+  delete(id:string): void {
+    if (confirm('Deseja excluir?')){
+
+      this.showProgress();
+      
+      this.wordService.deleteWord(id).subscribe((response: any) => {
+        this.loadWords();
+      },
+      error => {
+        this.showError(error.error);
+        this.hideProgress();
+      });      
+    }
+  }
+
+  loadWords(): void{
     this.showProgress();
 
     this.wordService.getWords().subscribe((response: any) => {
@@ -27,17 +46,8 @@ export class WordsComponent extends BaseComponent implements OnInit {
       this.hideProgress();
     },
     error => {
-      console.warn(error);
+      this.showError(error.error);
       this.hideProgress();
     });
-  }
-
-  delete(id:string): void {
-    if (confirm('Deseja excluir?')){
-      this.showProgress();
-      alert("s: " + id);
-      //processar
-      this.hideProgress();
-    }
-  }
+  }  
 }
