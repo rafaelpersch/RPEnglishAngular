@@ -36,8 +36,6 @@ export class LoginComponent extends BaseComponent implements OnInit {
       return;
     }
 
-    //this.applicationMessage = "hehe";
-    //this.showSuccess('haha foi', 'title');
     this.showProgress();
 
     this.authService.postLogin(this.model).subscribe((response: any) => {
@@ -54,30 +52,6 @@ export class LoginComponent extends BaseComponent implements OnInit {
       }
       
       this.hideProgress();
-    });
-
-    /*this.authService.postLogin(this.model).then((response: any) => {
-        this.hideProgress();
-        if (response.message != null) {
-            this.showWarning(response.message);
-        } else {
-            
-            this.registerMenu();
-        }
-    }).catch(err => {
-        this.hideProgress();
-        console.log(err);
-        if (err.status === 404) {
-            this._matSnackBar.open('Usuário não cadastrado', 'OK', {
-                verticalPosition: 'top',
-                duration        : 2000
-            });
-        } else {
-            this._matSnackBar.open('Houve um erro ao processar sua requisição', 'OK', {
-                verticalPosition: 'top',
-                duration        : 2000
-            });
-        }
-    });*/    
+    });   
   }  
 }

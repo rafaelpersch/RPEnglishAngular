@@ -34,16 +34,6 @@ export class AppComponent {
   }
   
   ngOnInit() {
-    /*this.annotationService.getAnnorations().subscribe((annorations: Annotation[]) => {
-      alert("success");
-      console.log(annorations);
-    },
-    error => {
-      alert("error");
-      console.log("error: " + error);
-      console.log(error);
-    })*/
-    //this.getCars();
   }
 
   // defini se um carro será criado ou atualizado

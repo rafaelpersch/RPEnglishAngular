@@ -56,7 +56,6 @@ export class AuthService extends BaseHttpService implements CanActivate {
         const redirectUrl = localStorage.getItem(LocalStorageKeyEnum.REDIRECT_URL);
 
         if (redirectUrl != null) {
-            //this._router.navigateByUrl(redirectUrl);
             window.location.href = redirectUrl;
             localStorage.removeItem(LocalStorageKeyEnum.REDIRECT_URL);
         } else {

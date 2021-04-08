@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { BaseComponent } from '../base/base.component';
+import { Category } from '../models/category';
 import { Word } from '../models/word';
+import { CategoryService } from '../services/category.service';
 import { WordService } from '../services/word.service';
 
 @Component({
@@ -11,16 +13,20 @@ import { WordService } from '../services/word.service';
 })
 export class WordsComponent extends BaseComponent implements OnInit {
 
+  categoryid:string;
+  categories:Category[];
   words:Word[];
 
-  constructor(private wordService:WordService, toastr: ToastrService) { 
+  constructor(private wordService:WordService, private categoryService:CategoryService, toastr: ToastrService) { 
     super(toastr); 
 
     this.words = [];
+    this.categories = [];
+    this.categoryid = '';
   }
 
   ngOnInit(): void {
-    this.loadWords();
+    this.loadCategories();
   }
 
   delete(id:string): void {
@@ -41,7 +47,7 @@ export class WordsComponent extends BaseComponent implements OnInit {
   loadWords(): void{
     this.showProgress();
 
-    this.wordService.getWords().subscribe((response: any) => {
+    this.wordService.getWordsByCategory(this.categoryid).subscribe((response: any) => {
       this.words = response;
       this.hideProgress();
     },
@@ -50,4 +56,25 @@ export class WordsComponent extends BaseComponent implements OnInit {
       this.hideProgress();
     });
   }  
+
+  loadCategories(): void{
+    this.showProgress();
+
+    this.categoryService.getCategories().subscribe((response: any) => {
+      this.categories = response;
+      this.hideProgress();
+    },
+    error => {
+      this.showError(error.error);
+      this.hideProgress();
+    });
+  }  
+
+  onChangeCategory(categoryid: string): void{
+    if (categoryid !== ""){
+      this.categoryid = categoryid;
+
+      this.loadWords();
+    }
+  }
 }

@@ -7,22 +7,9 @@
 <div class="row">
     <div class="col-md-12 mb-3">
         <label>Category</label>
-        <select class="form-control" id="categoryid">
+        <select class="form-control" #category (change)="onChangeCategory(category.value)">
             <option value=""></option>
-            <!--@if(ViewBag.Categories != null)
-            {
-                foreach(var category in ViewBag.Categories)
-                {
-                    if(ViewBag.Categoryid == category.Id)
-                    {
-                        <option value="@category.Id" selected>@category.Name</option>
-                    }
-                    else
-                    {
-                        <option value="@category.Id">@category.Name</option>
-                    }
-                }
-            }-->
+            <option *ngFor="let category of categories" value="{{category.id}}" >{{category.name}}</option>
         </select>
     </div>
 </div>                     
@@ -48,11 +35,3 @@
         </table>
     </div>
 </div>
-
-<!--@section Scripts {
-<script>
-    $('#categoryid').on('change', function() {
-        window.location.href = "/words/index?categoryid="+this.value;
-    });
-</script>
-}-->
