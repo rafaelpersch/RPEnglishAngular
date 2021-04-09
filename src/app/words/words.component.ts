@@ -30,7 +30,7 @@ export class WordsComponent extends BaseComponent implements OnInit {
   }
 
   delete(id:string): void {
-    if (confirm('Deseja excluir?')){
+    if (confirm('Want to delete?')){
 
       this.showProgress();
       
