@@ -1,1 +1,41 @@
-<p>word works!</p>
+<div class="row">
+    <div class="col-md-12 order-md-1">
+        <h4 class="mb-3">Words</h4>
+        <form class="needs-validation" [formGroup]="form" (ngSubmit)="saveWord()" novalidate>
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <label>Name</label>
+                    <input type="text" class="form-control" required formControlName="name" [(ngModel)]="word.name">
+                    <small *ngIf="this.form.get('name')?.hasError('required') && this.clickSubmit" class="text-danger d-block mt-2">is required!</small>                
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <label>Translation</label>
+                    <input type="text" class="form-control" required  formControlName="translation" [(ngModel)]="word.translation">
+                    <small *ngIf="this.form.get('translation')?.hasError('required') && this.clickSubmit" class="text-danger d-block mt-2">is required!</small>                
+                </div>
+            </div>            
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <label>Observation</label>
+                    <textarea class="form-control" rows="4" formControlName="observation" [(ngModel)]="word.observation"></textarea>
+                </div>
+            </div>                        
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <label>Category</label>
+                    <select [(ngModel)]="word.categoryId" required formControlName="categoryId" class="form-control">
+                        <option *ngFor="let category of categories" value="{{category.id}}" >{{category.name}}</option>
+                    </select>
+                    <small *ngIf="this.form.get('categoryId')?.hasError('required') && this.clickSubmit" class="text-danger d-block mt-2">is required!</small>                
+                </div>
+            </div>                                    
+            <div class="row">
+                <div class="col-md-12 mb-3">
+                    <button class="btn btn-primary float-right" type="submit">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
