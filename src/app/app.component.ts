@@ -19,8 +19,6 @@ export class AppComponent {
   cars: Car[] = [];
   isAuthenticated: boolean = false;
 
-  /*constructor(private carService: BaseHttpService) {
-  }*/
   constructor(private authService: AuthService, private location:Location){
     this.isAuthenticated = authService.isAuthenticated();
 
@@ -34,45 +32,5 @@ export class AppComponent {
   }
   
   ngOnInit() {
-  }
-
-  // defini se um carro será criado ou atualizado
-  saveCar(form: NgForm) {
-    /*if (this.car.id !== undefined) {
-      this.carService.put(this.car).subscribe(() => {
-        this.cleanForm(form);
-      });
-    } else {
-      this.carService.post(this.car).subscribe(() => {
-        this.cleanForm(form);
-      });
-    }*/
-  }
-
-  // Chama o serviço para obtém todos os carros
-  getCars() {
-    /*this.carService.get().subscribe((cars: Car[]) => {
-      this.cars = cars;
-    });*/
-  }
-
-  // deleta um carro
-  deleteCar(car: Car) {
-    /*this.carService.delete(car.id);
-    this.carService.deleteCar(car).subscribe(() => {
-      this.getCars();
-    });*/
-  }
-
-  // copia o carro para ser editado.
-  editCar(car: Car) {
-    this.car = { ...car };
-  }
-
-  // limpa o formulario
-  cleanForm(form: NgForm) {
-    //this.getCars();
-    form.resetForm();
-    this.car = {} as Car;
   }
 }
